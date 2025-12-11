@@ -57,11 +57,11 @@ public class Country {
     @Column(name = "head_of_state")
     private String headOfState;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "capital")
     private City capital;
 
     @OneToMany(mappedBy = "country")
-    private List<CountryLanguage> countryLanguages;
+    private List<CountryLanguage> languages;
 
 }
