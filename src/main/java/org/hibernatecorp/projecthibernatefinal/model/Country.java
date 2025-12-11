@@ -2,16 +2,20 @@ package org.hibernatecorp.projecthibernatefinal.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "country")
 public class Country {
 
     @Id
     @Column(name = "id")
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @Column(name = "code")
@@ -57,11 +61,12 @@ public class Country {
     @Column(name = "head_of_state")
     private String headOfState;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "capital")
+    @EqualsAndHashCode.Exclude
     private City capital;
 
-    @OneToMany(mappedBy = "country")
-    private List<CountryLanguage> languages;
-
+    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    private Set<CountryLanguage> languages;
 }

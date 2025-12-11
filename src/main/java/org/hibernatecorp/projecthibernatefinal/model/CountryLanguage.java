@@ -2,10 +2,13 @@ package org.hibernatecorp.projecthibernatefinal.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.math.BigDecimal;
 
 @Data
 @Entity
+@EqualsAndHashCode
 @Table(name = "country_language")
 public class CountryLanguage {
     @Id
